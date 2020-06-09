@@ -1,4 +1,5 @@
 let express = require('express');
+const correlator = require('express-correlation-id');
 let fs = require('fs');
 let app = express();
 var bodyParser = require('body-parser');
@@ -11,6 +12,7 @@ let routes = require('./routes.js');
 let path = require('path');
 app.use(cookieParser());
 app.use(bodyParser.json());
+app.use(correlator());
 const envConstants = require('./env.json')[process.env.NODE_ENV || 'dev'];
 app.use(morgan('[:date[clf]] :method :url :status :res[content-length] - :response-time ms'));
 
@@ -39,21 +41,9 @@ swaggerTools.initializeMiddleware(swaggerDoc, function(middleware) {
 
     // Serve the Swagger documents and Swagger UI
     app.use(middleware.swaggerUi());
-
-    app.use(errorhandler);
     // Start the server
     const port = (process.env.PORT) ? process.env.PORT : 3000;
     app.listen(port, function() {
         console.log('Your server is listening on port %d', port);
     });
 });
-
-function errorhandler(err, req, res, next) {
-    res.text = '';
-    res.body = {};
-    if (res.statusCode == 400) {
-        res.send({ message: `${err.message}.${err.results.errors[0].message}` })
-    } else {
-        res.status(500).send({ message: 'Internal server error' });
-    }
-}

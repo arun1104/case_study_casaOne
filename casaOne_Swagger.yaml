@@ -17,7 +17,7 @@ paths:
     get:
       description: ''
       summary: 'http://127.0.0.1:3000/v1/reviews'
-      operationId: 'getReviews'
+      operationId: 'getProductReviews'
       deprecated: false
       produces:
         - application/json
@@ -33,19 +33,38 @@ paths:
           required: true
           type: string
           description: 'denotes the unique product id'
-        - name: pageStartIndex
-          in: query
-          required: true
-          type: integer
-          description: 'start index for pagination'
-          default: 0
-        - name: pageTotalCount
-          in: query
-          required: true
-          type: integer
-          description: 'total reviews that can be displayed in a page'
-          default: 20
       responses:
         '200':
           description: ''
-          headers: {}
+          schema:
+           $ref: "#/definitions/getReviewResponse"
+    put:
+      description: ''
+      summary: 'http://127.0.0.1:3000/v1/reviews'
+      operationId: 'addProductReviews'
+      responses:
+        '200':
+          description: ''
+definitions:
+  getReviewResponse:
+    type: "object"
+    properties:
+      totalReviews:
+        type: "integer"
+        format: "int64"
+      averageRating:
+        type: "integer"
+        format: "int64"
+      individualRatings:
+        type: "array"
+        items: 
+         $ref: "#/definitions/individualRating"
+  individualRating:
+    type: "object"
+    properties:
+      rating:
+        type: "number"
+        format: "int64"
+      count:
+        type: "integer"
+        format: "int64"
