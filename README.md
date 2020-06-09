@@ -9,12 +9,12 @@
  {<br/>
 totalReviews: BigInteger,<br/>
 averageRating: Decimal,<br/>
-individualRatings:[{<br/>
+individualRatings:[<br/>{<br/>
 rating: Integer,<br/>
 count: BigInteger<br/>
-}],<br/>
-reviews:[
-{
+}<br/>],<br/>
+reviews:[<br/>
+{<br/>
 customerId: String,<br/>
 customerReviewText: String<br/>,
 rating: Integer<br/>
