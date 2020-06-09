@@ -1,0 +1,51 @@
+swagger: '2.0'
+info:
+  version: '1.0'
+  title: CasaOne Product Reviews API
+  description: 'Https endpoint to get product reviews'
+  contact: {}
+host: '127.0.0.1:3000'
+basePath: /v1
+schemes:
+  - https
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /reviews:
+    get:
+      description: ''
+      summary: 'http://127.0.0.1:3000/v1/reviews'
+      operationId: 'getReviews'
+      deprecated: false
+      produces:
+        - application/json
+      parameters:
+        - name: Content-Type
+          in: header
+          required: false
+          type: string
+          description: ''
+          default: 'application/json'
+        - name: productId
+          in: query
+          required: true
+          type: string
+          description: 'denotes the unique product id'
+        - name: pageStartIndex
+          in: query
+          required: true
+          type: integer
+          description: 'start index for pagination'
+          default: 0
+        - name: pageTotalCount
+          in: query
+          required: true
+          type: integer
+          description: 'total reviews that can be displayed in a page'
+          default: 20
+      responses:
+        '200':
+          description: ''
+          headers: {}
