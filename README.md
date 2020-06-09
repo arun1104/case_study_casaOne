@@ -1,6 +1,8 @@
 # case_study_casaOne
-REST API to get reviews of a product.
-#Request Method: GET
+
+ <br/>#REST API to get reviews of a product.
+
+ <br/>#Request Method: GET
 
 #Request Query Parameters: 1) pagination - Integer 2) product id
 
