@@ -1,0 +1,108 @@
+{
+	"info": {
+		"_postman_id": "8b1d1269-9c8d-4e97-850d-a4208181c3a7",
+		"name": "CasaOne Product Reviews API",
+		"description": "Https endpoint to get product reviews",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://127.0.0.1:3000/v1/reviews",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}/reviews?productId=<string>&pageStartIndex=0&pageTotalCount=20",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"reviews"
+					],
+					"query": [
+						{
+							"key": "productId",
+							"value": "<string>",
+							"description": "(Required) denotes the unique product id"
+						},
+						{
+							"key": "pageStartIndex",
+							"value": "0",
+							"description": "(Required) start index for pagination"
+						},
+						{
+							"key": "pageTotalCount",
+							"value": "20",
+							"description": "(Required) total reviews that can be displayed in a page"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Untitled Response",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/reviews?productId=<string>&pageStartIndex=0&pageTotalCount=20",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"reviews"
+							],
+							"query": [
+								{
+									"key": "productId",
+									"value": "<string>"
+								},
+								{
+									"key": "pageStartIndex",
+									"value": "0"
+								},
+								{
+									"key": "pageTotalCount",
+									"value": "20"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "text",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "text/plain"
+						}
+					],
+					"cookie": [],
+					"body": ""
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"id": "baseUrl",
+			"key": "baseUrl",
+			"value": "https://127.0.0.1:3000/v1",
+			"type": "string"
+		}
+	],
+	"protocolProfileBehavior": {}
+}
