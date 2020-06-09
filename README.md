@@ -16,7 +16,7 @@ count: BigInteger<br/>
 reviews:[<br/>
 {<br/>
 customerId: String,<br/>
-customerReviewText: String<br/>,
+customerReviewText: String,<br/>
 rating: Integer<br/>
 }<br/>
 ]<br/>
