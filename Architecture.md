@@ -1,10 +1,10 @@
-**Usecase to handle**
-<br/> Furniture has 2 types of attributes.
+
+# Usecase to handle
+Furniture has 2 types of attributes.
 1) Fixed - Attributes like colour,dimension,material,purchase price etc.
 2) Derived - Attributes like Assembling cost,time to assemble etc.<br/>
-<br/>
-**Problem statement: How to get latest values of derived attributes?**
-<br/>
+
+## Usecase: Get latest values of derived attributes?
 **Proposal:**
 <br/>To handle the derived attributes, I propose 2 microservices.<br/>
 1)CasaOne Furniture Domain Microservice - Exposes REST APIs that gives furniture details<br/>
