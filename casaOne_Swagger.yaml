@@ -50,6 +50,10 @@ paths:
           description: ''
           schema:
            $ref: "#/definitions/getReviewResponse"
+        '400':
+          description: 'Bad request'
+        '404':
+          description: 'Product not found'
     put:
       description: ''
       summary: 'http://127.0.0.1:3000/v1/reviews'

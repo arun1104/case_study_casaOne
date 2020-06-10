@@ -11,25 +11,30 @@ async function getProductReviews(queryStringParameters, correlationId) {
     try {
         logger.info('DB', process.env.Db);
         if (process.env.Db && process.env.Db.toLowerCase() == "mongodb") {
-            let res = await getProductReviewsMongoDB(queryStringParameters.productId,queryStringParameters.index,queryStringParameters.count);
+            let res = await getProductReviewsMongoDB(queryStringParameters.productId, queryStringParameters.index, queryStringParameters.count);
             res = JSON.parse(JSON.stringify(res));
-            let totalReviews = res.individualRatingCount.reduce((a, b) => ({ count: a.count + b.count }));
-            res.totalReviews = totalReviews;
-            res.avgRating =  res.avg[0].avgRating.toFixed(1);
-            delete res["avg"];
-            logger.info('DB response', res);
-            return res;
+            if (res.reviews.length > 0) {
+                let totalReviews = res.individualRatingCount.reduce((a, b) => ({ count: a.count + b.count }));
+                res.totalReviews = totalReviews;
+                res.avgRating = res.avg[0].avgRating.toFixed(1);
+                delete res["avg"];
+                logger.info('DB response', res);
+                return res;
+            } else {
+                throw { status: 404, message: "Product not found" }
+            }
+
         } else {
             return [];
         }
     }
     catch (err) {
-        console.log("Db conn err", err);
-        throw (new Error("DB error"));
+        logger.error(err);
+        throw err;
     }
 }
 
-async function getProductReviewsMongoDB(prodId,index,count) {
+async function getProductReviewsMongoDB(prodId, index, count) {
     return new Promise((resolve, reject) => {
         try {
             console.log("trying to connect to db");
@@ -37,9 +42,9 @@ async function getProductReviewsMongoDB(prodId,index,count) {
                 console.log("Connected successfully to server");
                 const db = client.db(dbName);
                 const collection = db.collection('reviews');
-                let reviewDocs = await collection.find({productId:prodId}).sort({updatedAt:-1}).skip(index).limit(count).toArray();
+                let reviewDocs = await collection.find({ productId: prodId }).sort({ updatedAt: -1 }).skip(index).limit(count).toArray();
                 reviewDocs = JSON.parse(JSON.stringify(reviewDocs));
-                reviewDocs = reviewDocs.map(e=>{return {review:e.reviewText,email:e.customerEmailId,rating:e.rating}});
+                reviewDocs = reviewDocs.map(e => { return { review: e.reviewText, email: e.customerEmailId, rating: e.rating } });
                 let avg = await collection.aggregate([
                     {
                         $match: {
@@ -86,7 +91,7 @@ async function getProductReviewsMongoDB(prodId,index,count) {
                     }
                 ]).toArray();
                 console.log(individualRatingCount);
-                resolve({ avg, individualRatingCount,reviews:reviewDocs });
+                resolve({ avg, individualRatingCount, reviews: reviewDocs });
             });
 
         } catch (err) {
