@@ -1,9 +1,7 @@
 const Logger = require("./logger");
 const MongoClient = require('mongodb').MongoClient;
-const url = 'mongodb://localhost:27017';
-const dbName = 'test';
-process.env.Db = "mongodb";
-process.env.mongoUrl = "mongodb://localhost:27017/test";
+const url = process.env.mongoUrl;
+const dbName =  process.env.dbName;
 
 class DBLayer{
     constructor(){
