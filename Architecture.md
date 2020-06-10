@@ -1,14 +1,12 @@
-**Usecase**
+**Usecase to handle**
 <br/> Furniture has 2 types of attributes.
 1) Fixed - Attributes like colour,dimension,material,purchase price etc.
 2) Derived - Attributes like Assembling cost,time to assemble etc.<br/>
-<br/>**Architecture**<br/>
-
+<br/>**Problem statement: How to get latest values of derived attributes?**<br/>
 <br/>**Proposal:**<br/>
 <br/>To handle the derived attributes, I propose 2 microservices.<br/>
 1) CasaOne Furniture Domain Microservice - Exposes REST APIs that gives furniture details<br/>
 2) CasaOne Furniture Operations Microservice - Exposes REST APIs to get derived attributes from Operations team<br/>
-
 The communication between these microservices will be through Apache Kafka which supports a Pub-Sub model.
 <br/>Let's take an example:<br/>
 Consider the attribute **cost to Assemble**.<br/>
