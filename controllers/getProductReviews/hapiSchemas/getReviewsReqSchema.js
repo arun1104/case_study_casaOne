@@ -6,14 +6,13 @@ const schema = Joi.object({
         .min(3)
         .max(20)
         .required(),
-    pageStartIndex: Joi.number()
+    index: Joi.number()
         .integer()
-        .min(0)
-        .max(Infinity),
-    pageTotalCount: Joi.number()
+        .min(0),
+    count: Joi.number()
         .integer()
         .min(1)
-        .max(Infinity)
+        .max(100)
     });
 
 module.exports.getReviewsReqSchema = schema;
