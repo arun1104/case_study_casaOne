@@ -1,5 +1,5 @@
 'use strict';
-const { getReviews } = require("./getReviews");
+const reviews = require("./getReviews");
 const crypto = require("crypto");
 module.exports.getReviewsServerlessHandler = async function (event) {
     let correlationId;
@@ -13,7 +13,7 @@ module.exports.getReviewsServerlessHandler = async function (event) {
         try {
             switch (event.httpMethod) {
                 case 'GET':
-                    res = await getReviews(event.queryStringParameters,correlationId);
+                    res = await reviews.getReviews(event.queryStringParameters,correlationId);
                     break;
                 default:
                     throw (new Error(`Unsupported method "${event.httpMethod}"`));
