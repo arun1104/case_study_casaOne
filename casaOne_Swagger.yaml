@@ -2,12 +2,12 @@ swagger: '2.0'
 info:
   version: '1.0'
   title: CasaOne Product Reviews API
-  description: 'Https endpoint to get product reviews'
+  description: 'Http endpoint to get product reviews'
   contact: {}
 host: '127.0.0.1:3000'
 basePath: /v1
 schemes:
-  - https
+  - http
 consumes:
   - application/json
 produces:
@@ -33,6 +33,18 @@ paths:
           required: true
           type: string
           description: 'denotes the unique product id'
+        - name: index
+          in: query
+          required: true
+          type: integer
+          description: 'start index for pagination'
+          default: 0
+        - name: count
+          in: query
+          required: true
+          type: integer
+          description: 'total reviews that can be retrieved in an api invocation'
+          default: 10
       responses:
         '200':
           description: ''
@@ -59,6 +71,11 @@ definitions:
         type: "array"
         items: 
          $ref: "#/definitions/individualRating"
+      reviews:
+        type: "array"
+        items: 
+         $ref: "#/definitions/individualReviews"
+      
   individualRating:
     type: "object"
     properties:
@@ -68,3 +85,15 @@ definitions:
       count:
         type: "integer"
         format: "int64"
+  individualReviews:
+    type: "object"
+    properties:
+      rating:
+        type: "number"
+        format: "int64"
+      review:
+        type: "string"
+        default: ''
+      email:
+        type: "string"
+        default: ''

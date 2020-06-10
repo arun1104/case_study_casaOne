@@ -19,7 +19,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\"productId\":\"123\",\n\"rating\":1.5\n}",
+					"raw": "{\n\"productId\":\"123\",\n\"rating\":5,\n\"customerEmailId\":\"kamal@gmail.com\",\n\"reviewText\":\"Excellent product.\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -27,7 +27,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/v1/reviews?productId=123",
+					"raw": "http://localhost:3000/v1/reviews?productId=123&index=10&count=10",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -41,6 +41,14 @@
 						{
 							"key": "productId",
 							"value": "123"
+						},
+						{
+							"key": "index",
+							"value": "10"
+						},
+						{
+							"key": "count",
+							"value": "10"
 						}
 					]
 				}
@@ -49,15 +57,18 @@
 		},
 		{
 			"name": "http://localhost:3000/v1/reviews?productId=123",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
 			"request": {
 				"auth": {
 					"type": "noauth"
 				},
-				"method": "PUT",
+				"method": "GET",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\"productId\":\"123\",\n\"rating\":1.5\n}",
+					"raw": "{\n\"productId\":\"555\",\n\"rating\":5\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -65,7 +76,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/v1/reviews?productId=123",
+					"raw": "http://localhost:3000/v1/reviews?productId=555",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -78,7 +89,7 @@
 					"query": [
 						{
 							"key": "productId",
-							"value": "123"
+							"value": "555"
 						}
 					]
 				}
